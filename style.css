@@ -18,6 +18,10 @@ body {
     text-align: center;
 }
 
+.book div {
+    padding: 15px;
+}
+
 h1 {
     text-align: center;
 }
@@ -92,14 +96,15 @@ form {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    padding: 5px;
 }
 
+.myform,
 input,
 select {
     width: 80%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -146,3 +151,9 @@ button[type="submit"]:hover {
     color: white;
 }
 
+.read {
+    display: flex;
+    width: 25%;
+    margin: auto;
+    padding: 15px;
+}

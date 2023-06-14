@@ -56,6 +56,11 @@ function removeBookFromLibrary(book) {
     }
 }
 
+// Toggle Read
+function toggleReadStatus(book) {
+    book.read = !book.read;
+}
+
 // Show Books
 function showBooks() {
     const reversedLibrary = myLibrary.slice().reverse();
@@ -82,7 +87,20 @@ function showBooks() {
 
         const readDiv = document.createElement('div');
         readDiv.classList.add('read');
-        readDiv.textContent = 'Read: ' + (book.read ? 'Yes' : 'No');
+
+        const readLabel = document.createElement('label');
+        readLabel.textContent = 'Read: ';
+
+        const readCheckbox = document.createElement('input');
+        readCheckbox.type = 'checkbox';
+        readCheckbox.checked = book.read;
+
+        readCheckbox.addEventListener('change', function () {
+            toggleReadStatus(book);
+        });
+
+        readDiv.appendChild(readLabel);
+        readDiv.appendChild(readCheckbox);
 
         const button = document.createElement('button');
         button.classList.add('delete');
