@@ -50,9 +50,12 @@ document.body.appendChild(container);
 
 // Show Books
 function showBooks() {
+    const reversedLibrary = myLibrary.slice().reverse();
+    container.innerHTML = '';
+
     // Loop Through Books
-    for (let i = 0; i < myLibrary.length; i++) {
-        const book = new Book(myLibrary[i].title, myLibrary[i].author, myLibrary[i].pages, myLibrary[i].read);
+    for (let i = 0; i < reversedLibrary.length; i++) {
+        const book = new Book(reversedLibrary[i].title, reversedLibrary[i].author, reversedLibrary[i].pages, reversedLibrary[i].read);
 
         const bookList = document.createElement('div');
         bookList.classList.add('book');
@@ -82,3 +85,35 @@ function showBooks() {
 }
 
 showBooks();
+
+const showModalButton = document.getElementById('showModalButton');
+const modal = document.getElementById('modalForm');
+const close = document.querySelector('.close');
+
+showModalButton.addEventListener('click', function () {
+    modal.style.display = 'block';
+});
+
+close.addEventListener('click', function () {
+    modal.style.display = 'none';
+});
+
+const myForm = document.getElementById('myForm');
+
+myForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').value === 'read';
+
+    const newBook = new Book(title, author, pages, read);
+
+    addBookToLibrary(myLibrary, newBook);
+
+    myForm.reset();
+
+    showBooks();
+    modal.style.display = 'none';
+});
