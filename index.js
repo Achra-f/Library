@@ -48,6 +48,14 @@ container.classList.add('container');
 container.setAttribute('id', 'myContainer');
 document.body.appendChild(container);
 
+// Remove Book
+function removeBookFromLibrary(book) {
+    const index = myLibrary.indexOf(book);
+    if (index > -1) {
+        myLibrary.splice(index, 1);
+    }
+}
+
 // Show Books
 function showBooks() {
     const reversedLibrary = myLibrary.slice().reverse();
@@ -55,7 +63,7 @@ function showBooks() {
 
     // Loop Through Books
     for (let i = 0; i < reversedLibrary.length; i++) {
-        const book = new Book(reversedLibrary[i].title, reversedLibrary[i].author, reversedLibrary[i].pages, reversedLibrary[i].read);
+        const book = reversedLibrary[i];
 
         const bookList = document.createElement('div');
         bookList.classList.add('book');
@@ -76,10 +84,19 @@ function showBooks() {
         readDiv.classList.add('read');
         readDiv.textContent = 'Read: ' + (book.read ? 'Yes' : 'No');
 
+        const button = document.createElement('button');
+        button.classList.add('delete');
+        button.textContent = 'Remove';
+        button.addEventListener('click', function () {
+            removeBookFromLibrary(book);
+            showBooks();
+        });
+
         bookList.appendChild(titleDiv);
         bookList.appendChild(authorDiv);
         bookList.appendChild(pagesDiv);
         bookList.appendChild(readDiv);
+        bookList.appendChild(button);
         container.appendChild(bookList);
     }
 }
